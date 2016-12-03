@@ -74,6 +74,6 @@ function connectToHttpDevice(token, deviceaddress, devicelastip) {
          console.log('___________________________');
          */
         document.getElementById("connect").checked = true;
-        window.location = jsonResponse.connection.proxy.replace('https', 'http');
+        //window.location = jsonResponse.connection.proxy.replace('https', 'http');
     }, token, deviceaddress, devicelastip)
 }   
