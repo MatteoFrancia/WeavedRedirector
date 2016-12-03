@@ -61,7 +61,7 @@ function getDevicesList(token) {
          console.log('==================================');
          */
         document.getElementById("deviceList").checked = true;
-        connectToHttpDevice(token, jsonResponse.devices[1].deviceaddress, jsonResponse.devices[1].devicelastip);
+        connectToHttpDevice(token, jsonResponse.devices[0].deviceaddress, jsonResponse.devices[0].devicelastip);
     }, token)
 }
 
