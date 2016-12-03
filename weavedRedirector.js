@@ -58,6 +58,8 @@ function getDevicesList(token) {
          console.log('==================================');
          console.log(jsonResponse.devices[0].deviceaddress);
          console.log(jsonResponse.devices[0].devicelastip);
+         console.log(jsonResponse.devices[1].deviceaddress);
+         console.log(jsonResponse.devices[1].devicelastip);
          console.log('==================================');
  
         document.getElementById("deviceList").checked = true;
