@@ -52,14 +52,18 @@ function weavedLogin(username, password) {
 function getDevicesList(token) {
     httpRequestAsync('GET', 'https://api.weaved.com/v22/api/device/list/all', function (data) {
         var jsonResponse = JSON.parse(data);
-        /*
+        
          console.log('============ GET DEVICE LIST ======');
          console.log(data);
          console.log('==================================');
          console.log(jsonResponse.devices[0].deviceaddress);
          console.log(jsonResponse.devices[0].devicelastip);
+         console.log(jsonResponse.devices[1].deviceaddress);
+         console.log(jsonResponse.devices[1].devicelastip);
+         console.log(jsonResponse.devices[2].deviceaddress);
+         console.log(jsonResponse.devices[2].devicelastip);
          console.log('==================================');
-         */
+         
         document.getElementById("deviceList").checked = true;
         connectToHttpDevice(token, jsonResponse.devices[0].deviceaddress, jsonResponse.devices[0].devicelastip);
     }, token)
@@ -74,6 +78,6 @@ function connectToHttpDevice(token, deviceaddress, devicelastip) {
          console.log('___________________________');
          */
         document.getElementById("connect").checked = true;
-        window.location = jsonResponse.connection.proxy.replace('https', 'http');
+        //window.location = jsonResponse.connection.proxy.replace('https', 'http');
     }, token, deviceaddress, devicelastip)
 }   
