@@ -52,9 +52,10 @@ function weavedLogin(username, password) {
 function getDevicesList(token) {
     httpRequestAsync('GET', 'https://api.weaved.com/v22/api/device/list/all', function (data) {
         var jsonResponse = JSON.parse(data);
-        /*
          console.log('============ GET DEVICE LIST ======');
          console.log(data);
+         console.log(jsonResponse);
+        /*
          console.log('==================================');
          console.log(jsonResponse.devices[0].deviceaddress);
          console.log(jsonResponse.devices[0].devicelastip);
