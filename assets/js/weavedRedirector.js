@@ -24,6 +24,7 @@ function connectToHttpDevice(token, deviceaddress, devicelastip) {
     httpRequestAsync('POST', 'https://api.weaved.com/v22/api/device/connect', function (data) {
         var jsonResponse = JSON.parse(data);
         document.getElementById("connect").checked = true;
+        document.getElementById('login_button').className = 'btn btn-lg btn-success';
         window.location = jsonResponse.connection.proxy.replace('https', 'http');
     }, token, deviceaddress, devicelastip)
 }
