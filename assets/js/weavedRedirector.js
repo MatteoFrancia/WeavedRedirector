@@ -3,7 +3,7 @@ HTTP_WEAVED_SERVICE = 'http-mqtt';
 function weavedLogin(username, password) {
     httpRequestAsync('GET', 'https://api.weaved.com/v22/api/user/login/' + username + '/' + password, function (data) {
         var jsonResponse = JSON.parse(data);
-        document.getElementById("login").checked = true;
+        confirmStep("login");
         getDevicesList(jsonResponse.token);
     })
 }
@@ -13,7 +13,7 @@ function getDevicesList(token) {
         var jsonResponse = JSON.parse(data);
         for (device in jsonResponse.devices) {
             if (jsonResponse.devices[device].devicealias == HTTP_WEAVED_SERVICE) {
-                document.getElementById("deviceList").checked = true;
+                confirmStep("deviceList");
                 connectToHttpDevice(token, jsonResponse.devices[device].deviceaddress, jsonResponse.devices[device].devicelastip);
             }
         }
@@ -23,8 +23,8 @@ function getDevicesList(token) {
 function connectToHttpDevice(token, deviceaddress, devicelastip) {
     httpRequestAsync('POST', 'https://api.weaved.com/v22/api/device/connect', function (data) {
         var jsonResponse = JSON.parse(data);
-        document.getElementById("connect").checked = true;
-        document.getElementById('login_button').className = 'btn btn-lg btn-success';
+        confirmStep("connect");
+        document.getElementById('login_button').classList.replace('btn-warning', 'btn-success');
         window.location = jsonResponse.connection.proxy.replace('https', 'http');
     }, token, deviceaddress, devicelastip)
 }
@@ -57,4 +57,8 @@ function httpRequestAsync(type, url, callback, token, deviceaddress, devicelasti
         httpRequest.setRequestHeader("content-type", "application/json");
         httpRequest.send(jsonData);
     }
+}
+
+function confirmStep(step) {
+    document.getElementById(step).classList.replace('alert-secondary', 'alert-success');
 }
