@@ -3,41 +3,43 @@
 
 <head>
 
-    <title>Weaved Redirect</title>
-    <link rel="icon" sizes="192x192"
-          href="https://lh4.googleusercontent.com/-gUE8VA-1VRA/UltSS0v97cI/AAAAAAAAAGI/Rx-lJB6EA2Y/Raspberry_Pi_FLatLogo_red_green.png">
-    <script src="assets/js/weavedRedirector.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/weaved_redirector.css">
-    <script type="text/javascript" src="assets/js/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript">
-        function Login() {
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-            weavedLogin(username, password);
-        }
-    </script>
+	<title>Weaved Redirect</title>
+	<link rel="icon" sizes="192x192"
+	href="https://lh4.googleusercontent.com/-gUE8VA-1VRA/UltSS0v97cI/AAAAAAAAAGI/Rx-lJB6EA2Y/Raspberry_Pi_FLatLogo_red_green.png">
+	<link rel="apple-touch-icon" href="https://lh4.googleusercontent.com/-gUE8VA-1VRA/UltSS0v97cI/AAAAAAAAAGI/Rx-lJB6EA2Y/Raspberry_Pi_FLatLogo_red_green.png">
+
+	<script src="assets/js/weavedRedirector.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/weaved_redirector.css">
+	<script type="text/javascript" src="assets/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript">
+		function Login() {
+			var username = document.getElementById("username").value;
+			var password = document.getElementById("password").value;
+			weavedLogin(username, password);
+		}
+	</script>
 </head>
 
 <body>
 
-<div id="mainsquare" align="center" style="margin-left: 40%;">
-    <img src="https://www.weaved.com/wp-content/uploads/2015/09/Weaved-Logo.png" height="50px">
-    <hr>
-    <form action="javascript:Login()">
-        Username:<br>
-        <input type="text" id="username"><br>
-        Password:<br>
-        <input type="password" id="password"><br><br>
-        <button type="submit" id="login_button" class="btn btn-lg btn-outline-primary" style="margin: 10px;">LOGIN</button>
-    </form>
-</div>
-<br>
-<div id="logsquare" style="margin-left: 40%;">
-    <input type="checkbox" class="paddingClass" id="login">Weaved Login<br>
-    <input type="checkbox" class="paddingClass" id="deviceList">Retrieve Devices List<br>
-    <input type="checkbox" class="paddingClass" id="connect">HTTP Pi Connect<br>
-</div>
-<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+	<div id="mainsquare" align="center" style="margin-left: 40%;">
+		<img src="https://www.weaved.com/wp-content/uploads/2015/09/Weaved-Logo.png" height="50px">
+		<hr>
+		<form action="javascript:Login()">
+			Username:<br>
+			<input type="text" id="username"><br>
+			Password:<br>
+			<input type="password" id="password"><br><br>
+			<button type="submit" id="login_button" class="btn btn-lg btn-outline-primary" style="margin: 10px;">LOGIN</button>
+		</form>
+	</div>
+	<br>
+	<div id="logsquare" style="margin-left: 40%;">
+		<input type="checkbox" class="paddingClass" id="login">Weaved Login<br>
+		<input type="checkbox" class="paddingClass" id="deviceList">Retrieve Devices List<br>
+		<input type="checkbox" class="paddingClass" id="connect">HTTP Pi Connect<br>
+	</div>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>
