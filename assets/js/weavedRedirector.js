@@ -1,62 +1,71 @@
 HTTP_WEAVED_SERVICE = 'http-mqtt';
+API_KEY = "ODQ3QTNBOEItRkVERS00MUQxLTlEMUYtNDY1MkM5Mzk4RTlC";
 
 function weavedLogin(username, password) {
-    httpRequestAsync('GET', 'https://api.weaved.com/v22/api/user/login/' + username + '/' + password, function (data) {
-        var jsonResponse = JSON.parse(data);
+
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.remot3.it/apv/v23.5/user/login",
+        "method": "POST",
+        "headers": {
+            "developerkey": "" + API_KEY + "",
+            "content-type": "application/json",
+            "cache-control": "no-cache"
+        },
+        "processData": false,
+        "data": "{ \"username\" : \"" + username + "\", \"password\" : \"" + password + "\" }"
+    };
+
+    $.ajax(settings).done(function (response) {
         confirmStep("login");
-        getDevicesList(jsonResponse.token);
-    })
+        getDevicesList(response.token);
+    });
 }
 
 function getDevicesList(token) {
-    httpRequestAsync('GET', 'https://api.weaved.com/v22/api/device/list/all', function (data) {
-        var jsonResponse = JSON.parse(data);
-        for (device in jsonResponse.devices) {
-            if (jsonResponse.devices[device].devicealias == HTTP_WEAVED_SERVICE) {
-                confirmStep("deviceList");
-                connectToHttpDevice(token, jsonResponse.devices[device].deviceaddress, jsonResponse.devices[device].devicelastip);
+    $.ajax({
+        contentType: 'application/json',
+        dataType: 'json',
+        headers: {'apikey': API_KEY, 'token': token},
+        success: function (response) {
+            for (device in response.devices) {
+                if (response.devices[device].devicealias == HTTP_WEAVED_SERVICE) {
+                    confirmStep("deviceList");
+                    connectToHttpDevice(token, response.devices[device].deviceaddress, response.devices[device].devicelastip);
+                }
             }
-        }
-    }, token)
+        },
+        error: function (data) {
+            console.log("Devices Error: " + JSON.stringify(data));
+        },
+        processData: false,
+        type: 'GET',
+        url: 'https://api.remot3.it/apv/v23.5/device/list/all'
+    });
 }
 
 function connectToHttpDevice(token, deviceaddress, devicelastip) {
-    httpRequestAsync('POST', 'https://api.weaved.com/v22/api/device/connect', function (data) {
-        var jsonResponse = JSON.parse(data);
-        confirmStep("connect");
-        document.getElementById('login_button').classList.replace('btn-warning', 'btn-success');
-        window.location = jsonResponse.connection.proxy.replace('https', 'http');
-    }, token, deviceaddress, devicelastip)
-}
-
-function httpRequestAsync(type, url, callback, token, deviceaddress, devicelastip) {
-    var httpRequest = new XMLHttpRequest();
-    httpRequest.onreadystatechange = function () {
-        if (httpRequest.readyState == 4 && httpRequest.status == 200) {
-            var data = httpRequest.responseText;
-            if (callback) {
-                callback(data);
-            }
-        }
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.remot3.it/apv/v23.5/device/connect",
+        "method": "POST",
+        "headers": {
+            "apikey": API_KEY,
+            "token": token,
+            "content-type": "application/json",
+            "cache-control": "no-cache"
+        },
+        "processData": false,
+        "data": "{ \"deviceaddress\" : \"" + deviceaddress + "\", \"hostip\" : \"" + devicelastip + "\",\"wait\" : \"true\" }"
     };
 
-    if (type == 'GET') {
-        httpRequest.open('GET', url, true);
-        httpRequest.setRequestHeader('apikey', 'WeavedDemoKey$2015');
-        if (token) {
-            httpRequest.setRequestHeader('token', token);
-        }
-        httpRequest.send(null);
-    }
-
-    if (type == 'POST') {
-        jsonData = '{"deviceaddress":"' + deviceaddress + '", "hostip":"' + devicelastip + '","wait":"true"}'
-        httpRequest.open('POST', url, true);
-        httpRequest.setRequestHeader('apikey', 'WeavedDemoKey$2015');
-        httpRequest.setRequestHeader('token', token);
-        httpRequest.setRequestHeader("content-type", "application/json");
-        httpRequest.send(jsonData);
-    }
+    $.ajax(settings).done(function (response) {
+        document.getElementById('login_button').classList.replace('btn-warning', 'btn-success');
+        confirmStep("connect");
+        window.location = response.connection.proxy.replace('https', 'http');
+    });
 }
 
 function confirmStep(step) {
