@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<title>Sensibo Client</title>
+	<link rel="icon" sizes="192x192"
+	href="https://d1qb2nb5cznatu.cloudfront.net/startups/i/382138-e9f2f19300f33386e22d1b35988650de-medium_jpg.jpg">
+	<link rel="apple-touch-icon" href="https://lh4.googleusercontent.com/-gUE8VA-1VRA/UltSS0v97cI/AAAAAAAAAGI/Rx-lJB6EA2Y/Raspberry_Pi_FLatLogo_red_green.png">
+
+	<script src="assets/js/sensibo.js" type="text/javascript"></script>
+
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+		function TurnOn() {
+			document.getElementById('yes_button').classList.replace('btn-primary', 'btn-warning');
+			let url="https://maker.ifttt.com/trigger/turn_condizionatore_on/with/key/pWmRQYIbXw9Xlai6ocoNDSU2Em3VVh9qRFQzPvpUBhp"
+		    fetch(url)
+		    document.getElementById('yes_button').classList.replace('btn-warning', 'btn-success');
+		}
+	</script>
+</head>
+
+<body>
+
+<br><br>
+
+	<div class="container" id="container">
+		<div class="row">
+			<div class="col">
+			</div>
+			<div class="col-10">
+
+				<div class="card border-primary mb-3">
+				  <div class="card-header">
+				  	<h3 class="text-center">
+							<img src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/382138-e9f2f19300f33386e22d1b35988650de-medium_jpg.jpg?buster=1538032174" height="50px">
+							<br>
+							Sensibo
+						</h3>
+				  </div>
+				  <div class="card-body text-primary">
+				    <h5 class="card-title">Do you want to turn Condizionatore on?</h5>
+				    <form action="javascript:TurnOn()">
+						 <button type="submit" class="btn btn-primary btn-lg btn-block" id="yes_button">YES</button>
+					</form>
+				  </div>
+				</div>
+			</div>
+			<div class="col">
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+<!-- 	<div id="mainsquare" align="center" style="margin-left: 40%;">
+		<img src="http://is3.mzstatic.com/image/thumb/Purple7/v4/f3/ba/03/f3ba0315-540b-334f-6517-9c23ba13a382/source/1200x630bb.jpg" height="50px">
+		<hr>
+		<form action="javascript:Login()">
+			Username:<br>
+			<input type="text" id="username"><br>
+			Password:<br>
+			<input type="password" id="password"><br><br>
+			<button type="submit" id="login_button" class="btn btn-lg btn-outline-primary" style="margin: 10px;">LOGIN</button>
+		</form>
+	</div>
+	<br>
+	<div id="logsquare" style="margin-left: 40%;">
+		<input type="checkbox" class="paddingClass" id="login">Weaved Login<br>
+		<input type="checkbox" class="paddingClass" id="deviceList">Retrieve Devices List<br>
+		<input type="checkbox" class="paddingClass" id="connect">HTTP Pi Connect<br>
+	</div> -->
+
+</body>
+</html>
